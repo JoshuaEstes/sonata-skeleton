@@ -1,0 +1,32 @@
+upstream phpfcgi {
+    server 127.0.0.1:9000;
+}
+
+server {
+    listen 80;
+
+    server_name sonata_skeleton;
+    root /var/www/sonata_skeleton;
+
+    error_log /var/log/nginx/sonata_skeleton.error.log;
+    access_log /var/log/nginx/sonata_skeleton.access.log;
+
+    rewrite ^/app\.php/?(.*)$ /$1 permanent;
+
+    location / {
+        index app.php;
+        try_files $uri @reqriteapp;
+    }
+
+    location @rewriteapp {
+        rewrite ^(.*)$ /app.php/$1 last;
+    }
+
+    location ~ ^/(app|app_dev|config)\.php(/|$) {
+        fastcgi_pass phpfcgi;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param HTTPS off;
+    }
+}

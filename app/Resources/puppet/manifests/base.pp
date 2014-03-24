@@ -5,6 +5,7 @@
 # in production
 #
 $packages = [
+    'vim',
     'php5',
     'php-apc',
     'php5-curl',
@@ -21,3 +22,5 @@ $packages = [
 package { $packages:
     ensure => latest,
 }
+
+class { 'nginx': }
