@@ -1,11 +1,11 @@
 parameters:
     database_driver:   pdo_mysql
     database_host:     127.0.0.1
-    database_name:     sonata_sandbox
-    database_user:     sonata
-    database_password: sonata
+    database_name:     sonata_skeleton
+    database_user:     root
+    database_password: ~
 
-    mailer_transport:   smtp
+    mailer_transport:   mail
     mailer_host:        localhost
     mailer_user:
     mailer_password:
@@ -20,7 +20,7 @@ parameters:
 
     # Sonata News Options
     sonata_news.blog_title:         My Awesome Blog
-    sonata_news.blog_link:          http://awesome-blog.ltd
+    sonata_news.blog_link:          http://localhost:9090
     sonata_news.blog_description:   My Awesome blog description
     sonata_news.salt:               ThisTokenIsNotSoSecretChangeIt
     sonata_news.comment.emails:     [mail@example.org]
